@@ -57,5 +57,14 @@ func main() {
 	}
 
 	log.Printf("Created: %t", r.Created)
-	log.Printf("Data: %v", r.Consignment)
+
+	getAll, err := client.GetConsignments(context.Background(), &pb.GetRequest{})
+	if err != nil {
+		log.Fatalf("Could not list cosignments: %v", err)
+	}
+
+	for _, v := range getAll.Consignments {
+		log.Println(v)
+	}
+
 }
